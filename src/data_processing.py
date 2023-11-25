@@ -2,12 +2,18 @@ import holidays
 from meteostat import Point, Daily
 from tqdm import tqdm
 from datetime import datetime
+from utils import load_pickle_file
+import pandas as pd
 
 class DataProcessing():
     def __init__(self,year,month) -> None:
         self.__dict__.update(locals())
         self.features = {}
         self.berlin = Point(52.5667, 13.3167,37)
+        self.features["year"] = [int(year)]
+        self.features["month"] = [int(month)]
+        self.transformed_features = []
+    
     
     
     def get_holidays(self):
@@ -30,13 +36,19 @@ class DataProcessing():
             mean_weather_data[k].append(data[i])
             i =i+1        
         self.features.update(mean_weather_data)
+        
+        
+    def scale_data(self):
+        scaler = load_pickle_file("model/scaler.pkl")
+        self.transformed_features = scaler.transform(pd.DataFrame(self.features))
  
         
         
     def process_data(self):
         self.get_holidays()
         self.get_weather_data()
-        return self.features
+        self.scale_data()
+        return self.features, self.transformed_features
     
     
 if __name__ == "__main__":
