@@ -1,5 +1,6 @@
 import pickle
 import os 
+import xgboost
 
 def load_pickle_file(path):
     file_name = os.path.join(os.getcwd(),path)
