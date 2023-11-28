@@ -4,14 +4,14 @@ from data_processing import DataProcessing
 import os
 
 def predict_data(data):
-    model = load_pickle_file(os.path.join(os.getcwd(),"model/DPS_xgb_reg.pkl"))
+    model = load_pickle_file(os.path.join(os.getcwd(),"DPS_xgb_reg.pkl"))
     return model.predict(data)
 
 app = Flask(__name__)  
 
     
-@app.route('/prediction')
-def index(methods=['POST','GET']):
+@app.route('/',methods=['POST','GET'])
+def index():
     data = request.get_json()
     year = data['year']
     month = data['month']
@@ -22,4 +22,4 @@ def index(methods=['POST','GET']):
     return jsonify(response)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=8000, debug=True)
+    app.run(debug=True)

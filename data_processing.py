@@ -39,7 +39,7 @@ class DataProcessing():
         
         
     def scale_data(self):
-        scaler = load_pickle_file("model/scaler.pkl")
+        scaler = load_pickle_file("scaler.pkl")
         self.transformed_features = scaler.transform(pd.DataFrame(self.features))
  
         
