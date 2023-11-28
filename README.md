@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 ## Endpoint
 The model is deployed at [link](https://dps-model-ekxrxrejtq-no.a.run.app).
-You need to input a json like this with this POST method 
+You need to input a json like this with the POST method: 
 ```javascript
 { "year": 2013,
 "month": 3 }
